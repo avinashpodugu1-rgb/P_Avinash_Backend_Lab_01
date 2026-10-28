@@ -4,6 +4,8 @@
 **Registration number:** 252U1R1194  
 **Section:** CSE-2D
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/avinashpodugu1-rgb/P_Avinash_Backend_Lab)
+
 ## Architecture
 
 The project separates the server startup, Express app configuration, and route definitions:
