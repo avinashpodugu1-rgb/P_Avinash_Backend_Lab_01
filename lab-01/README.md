@@ -47,25 +47,36 @@ npm run plain
 
 Both servers use port `3000` by default. Set the `PORT` environment variable to use a different port.
 
+## Live Deployment (Render)
+
+The application is deployed live on Render:
+
+- **Base URL (Home):** [https://p-avinash-backend-lab.onrender.com/](https://p-avinash-backend-lab.onrender.com/)
+- **About Route:** [https://p-avinash-backend-lab.onrender.com/about](https://p-avinash-backend-lab.onrender.com/about)
+- **Current Date & Time:** [https://p-avinash-backend-lab.onrender.com/time](https://p-avinash-backend-lab.onrender.com/time)
+- **404 Error Found:** [https://p-avinash-backend-lab.onrender.com/unknown](https://p-avinash-backend-lab.onrender.com/unknown)
+
 ## Express routes and expected results
 
-| Method | Path | Status | Output | Screenshot |
-|---|---|---:|---|---|
-| GET | `/` | 200 | `Node.js and Express are ready to handle your requests!` | [Home Screenshot](screenshots/home-route.png) |
-| GET | `/about` | 200 | JSON containing name, registration number, and section | [About Screenshot](screenshots/about-route.png) |
-| GET | `/time` | 200 | Current date and time | [Time Screenshot](screenshots/time-route.png) |
-| GET | Any unknown path, e.g. `/unknown` | 404 | `404 - Page Not Found` | [404 Screenshot](screenshots/404-error.png) |
+| Method | Path | Status | Output | Live Render URL | Screenshot |
+|---|---|---:|---|---|---|
+| GET | `/` | 200 | `Node.js and Express are ready to handle your requests!` | [Live Home](https://p-avinash-backend-lab.onrender.com/) | [Home Screenshot](screenshots/home-route.png) |
+| GET | `/about` | 200 | JSON containing name, registration number, and section | [Live About](https://p-avinash-backend-lab.onrender.com/about) | [About Screenshot](screenshots/about-route.png) |
+| GET | `/time` | 200 | Current date and time | [Live Time](https://p-avinash-backend-lab.onrender.com/time) | [Time Screenshot](screenshots/time-route.png) |
+| GET | Any unknown path, e.g. `/unknown` | 404 | `404 - Page Not Found` | [Live 404](https://p-avinash-backend-lab.onrender.com/unknown) | [404 Screenshot](screenshots/404-error.png) |
 
 ### Route Outputs and Screenshots
 
 #### 1. Home Route (`GET /`)
-- **URL:** `http://localhost:3000/`
+- **Local URL:** `http://localhost:3000/`
+- **Live Render URL:** [https://p-avinash-backend-lab.onrender.com/](https://p-avinash-backend-lab.onrender.com/)
 - **Output:** `Node.js and Express are ready to handle your requests!`
 
 ![Home Route Output](screenshots/home-route.png)
 
 #### 2. About Route (`GET /about`)
-- **URL:** `http://localhost:3000/about`
+- **Local URL:** `http://localhost:3000/about`
+- **Live Render URL:** [https://p-avinash-backend-lab.onrender.com/about](https://p-avinash-backend-lab.onrender.com/about)
 - **Response JSON:**
 
 ```json
@@ -79,13 +90,15 @@ Both servers use port `3000` by default. Set the `PORT` environment variable to 
 ![About Route Output](screenshots/about-route.png)
 
 #### 3. Date and Time Route (`GET /time`)
-- **URL:** `http://localhost:3000/time`
+- **Local URL:** `http://localhost:3000/time`
+- **Live Render URL:** [https://p-avinash-backend-lab.onrender.com/time](https://p-avinash-backend-lab.onrender.com/time)
 - **Output:** `Current date and time: <current_timestamp>`
 
 ![Date and Time Route Output](screenshots/time-route.png)
 
 #### 4. 404 Page Not Found (`GET /unknown`)
-- **URL:** `http://localhost:3000/unknown`
+- **Local URL:** `http://localhost:3000/unknown`
+- **Live Render URL:** [https://p-avinash-backend-lab.onrender.com/unknown](https://p-avinash-backend-lab.onrender.com/unknown)
 - **Output:** `404 - Page Not Found`
 
 ![404 Error Output](screenshots/404-error.png)
