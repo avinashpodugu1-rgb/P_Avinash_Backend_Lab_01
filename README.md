@@ -11,6 +11,17 @@
   <b>A hands-on backend development project exploring HTTP servers, Express.js routing, request handling, and HTTP status codes.</b>
 </p>
 
+
+
+---
+
+## 📂 Course Labs Directory
+
+| Lab | Title | Folder | Description | Status |
+|:---|:---|:---|:---|:---:|
+| **Lab 1** | Node.js and Express Server | [📂 `lab-01/`](./lab-01/) | HTTP servers, Express routes, status codes, and Render live deployment | ✅ Completed |
+| **Lab 2** | SQLite Database & CRUD Routes | [📂 `lab-02/`](./lab-02/) | Express with SQLite (`books.db`), full CRUD endpoints, parameterized queries, and input validation | ✅ Completed |
+
 ---
 
 ## 👨‍💻 Student Information
@@ -615,6 +626,17 @@ The main skills I strengthened during this experiment were:
 - **Deployment:** Understanding how to make a backend application accessible online.
 
 This experiment gave me practical experience with Node.js and Express.js and helped me build a foundation for developing more advanced backend applications.
+
+
+---
+
+## 📂 Course Labs Directory
+
+| Lab | Title | Folder | Description | Status |
+|:---|:---|:---|:---|:---:|
+| **Lab 1** | Node.js and Express Server | [📂 `lab-01/`](./lab-01/) | HTTP servers, Express routes, status codes, and Render live deployment | ✅ Completed |
+| **Lab 2** | SQLite Database & CRUD Routes | [📂 `lab-02/`](./lab-02/) | Express with SQLite (`books.db`), full CRUD endpoints, parameterized queries, and input validation | ✅ Completed |
+
 <p align="center">
   <b>Built with Node.js & Express.js</b>
   <br>
