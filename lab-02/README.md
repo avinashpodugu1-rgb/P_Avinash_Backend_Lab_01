@@ -17,6 +17,7 @@ The Express server connects to an embedded SQLite database (`books.db`) and prov
 - **GET Single Book (ID 3):** [http://localhost:3000/books/3/](http://localhost:3000/books/3/)
 - **GET Single Book (ID 1):** [http://localhost:3000/books/1/](http://localhost:3000/books/1/)
 - **GET Unknown Book (404):** [http://localhost:3000/books/999/](http://localhost:3000/books/999/)
+- **GET Deleted Book Verification (404):** [http://localhost:3000/books/2/](http://localhost:3000/books/2/)
 
 ### Live Cloud Deployment (Render)
 - **Base URL:** [https://p-avinash-backend-lab-02.onrender.com/](https://p-avinash-backend-lab-02.onrender.com/)
@@ -28,25 +29,26 @@ The Express server connects to an embedded SQLite database (`books.db`) and prov
 
 ```text
 lab-02/
-├── index.js                    # Express application & initializeDBAndServer()
-├── schema.sql                  # Database table definition & initial 9 seed records
-├── initdb.js                   # Database initialization and reset script
-├── books.db                    # SQLite database file storing book records
-├── package.json                # Project configuration, dependencies & scripts
-├── package-lock.json           # Locked dependency tree
-├── .gitignore                  # Ignores node_modules/ and .env
-├── README.md                   # Lab documentation, instructions & viva answers
-└── screenshots/                # Request, response, and database proof captures
-    ├── 00-root-home.png        # GET / (200 OK - API overview)
-    ├── 01-get-all.png          # GET /books/ (200 OK - all books)
-    ├── 02-get-one.png          # GET /books/3/ (200 OK - Clean Code)
-    ├── 02b-get-one-updated.png # GET /books/1/ (200 OK - The Alchemist Updated)
-    ├── 03-get-one-404.png      # GET /books/999/ (404 Not Found)
-    ├── 04-post-add.png         # POST /books/ (201 Created)
-    ├── 05-post-invalid-400.png # POST /books/ (400 Bad Request - validation error)
-    ├── 06-put-update.png       # PUT /books/:bookId/ (200 OK - updated record)
-    ├── 07-delete.png           # DELETE /books/:bookId/ (200 OK - deleted record)
-    ├── 08-sql-injection-safe.png # SQL injection attempt handled safely (404 Not Found)
+├── index.js                         # Express application & initializeDBAndServer()
+├── schema.sql                       # Database table definition & initial 9 seed records
+├── initdb.js                        # Database initialization and reset script
+├── books.db                         # SQLite database file storing book records
+├── package.json                     # Project configuration, dependencies & scripts
+├── package-lock.json                # Locked dependency tree
+├── .gitignore                       # Ignores node_modules/ and .env
+├── README.md                        # Lab documentation, instructions & viva answers
+└── screenshots/                     # Request, response, and database proof captures
+    ├── 00-root-home.png             # GET / (200 OK - API overview)
+    ├── 01-get-all.png               # GET /books/ (200 OK - all books)
+    ├── 02-get-one.png               # GET /books/3/ (200 OK - Clean Code)
+    ├── 02b-get-one-updated.png      # GET /books/1/ (200 OK - The Alchemist Updated)
+    ├── 03-get-one-404.png           # GET /books/999/ (404 Not Found)
+    ├── 04-post-add.png              # POST /books/ (201 Created)
+    ├── 05-post-invalid-400.png      # POST /books/ (400 Bad Request - validation error)
+    ├── 06-put-update.png            # PUT /books/:bookId/ (200 OK - updated record)
+    ├── 07-delete.png                # DELETE /books/:bookId/ (200 OK - deleted record)
+    ├── 07b-deleted-book-verify-404.png # GET /books/2/ (404 Not Found - verify deletion)
+    ├── 08-sql-injection-safe.png    # SQL injection attempt handled safely (404 Not Found)
     └── 09-database-after-changes.png # SQLite CLI view verifying persistent DB updates
 ```
 
@@ -237,6 +239,14 @@ Initial seed records (9 books):
 
 ![DELETE a book](screenshots/07-delete.png)
 
+#### Verification: Requesting Deleted Book (`GET /books/2/`) returns 404
+- **URL:** `http://localhost:3000/books/2/`
+- **Method:** `GET`
+- **Status:** `404 Not Found`
+- **Output:** `{"error": "Book not found"}`
+
+![Verification of Deleted Book returning 404](screenshots/07b-deleted-book-verify-404.png)
+
 ---
 
 ### 8. SQL Injection Prevention Verification
@@ -310,6 +320,7 @@ Initial seed records (9 books):
 - [x] `POST /books/` with invalid body returns validation error (Status 400)
 - [x] `PUT /books/:bookId/` updates book (Status 200)
 - [x] `DELETE /books/:bookId/` removes book (Status 200)
+- [x] Verification that deleted book returns 404 Not Found
 - [x] Parameterized `?` placeholders prevent SQL injection
 - [x] `books.db` verified via SQLite query showing persistent updates
 - [x] Actual browser screenshots added to `screenshots/` and embedded in `README.md`
