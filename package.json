@@ -1,0 +1,14 @@
+{
+  "name": "p-avinash-backend-labs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend Development Fundamentals Labs - Aurora",
+  "scripts": {
+    "start": "node lab-02/index.js",
+    "build": "npm --prefix lab-02 install",
+    "postinstall": "npm --prefix lab-02 install"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
