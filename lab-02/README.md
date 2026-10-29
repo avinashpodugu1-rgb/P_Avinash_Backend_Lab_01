@@ -7,25 +7,24 @@
 
 ---
 
-## 🌐 Live Render Deployment
+## 🌐 Live & Local Server Execution
 
-The server is deployed live on Render as a cloud web service:
+The Express server connects to an embedded SQLite database (`books.db`) and provides full CRUD routes over HTTP.
 
-- **Base URL (API Overview):** [https://p-avinash-backend-lab-02.onrender.com/](https://p-avinash-backend-lab-02.onrender.com/)
+### Localhost Server
+- **Localhost Base URL:** [http://localhost:3000/](http://localhost:3000/)
+- **GET All Books:** [http://localhost:3000/books/](http://localhost:3000/books/)
+- **GET Single Book (ID 3):** [http://localhost:3000/books/3/](http://localhost:3000/books/3/)
+- **GET Single Book (ID 1):** [http://localhost:3000/books/1/](http://localhost:3000/books/1/)
+- **GET Unknown Book (404):** [http://localhost:3000/books/999/](http://localhost:3000/books/999/)
+
+### Live Cloud Deployment (Render)
+- **Base URL:** [https://p-avinash-backend-lab-02.onrender.com/](https://p-avinash-backend-lab-02.onrender.com/)
 - **GET All Books:** [https://p-avinash-backend-lab-02.onrender.com/books/](https://p-avinash-backend-lab-02.onrender.com/books/)
-- **GET Single Book (ID 3):** [https://p-avinash-backend-lab-02.onrender.com/books/3/](https://p-avinash-backend-lab-02.onrender.com/books/3/)
-- **GET Non-Existent Book (404):** [https://p-avinash-backend-lab-02.onrender.com/books/999/](https://p-avinash-backend-lab-02.onrender.com/books/999/)
-- **POST Add Book:** `POST https://p-avinash-backend-lab-02.onrender.com/books/`
-- **PUT Update Book:** `PUT https://p-avinash-backend-lab-02.onrender.com/books/1/`
-- **DELETE Remove Book:** `DELETE https://p-avinash-backend-lab-02.onrender.com/books/2/`
-
-> **Note on Free Instance Cold Starts:** On Render's free tier, the service automatically spins down after 15 minutes of inactivity. The initial request might take 30–50 seconds to wake up the server.
 
 ---
 
 ## Architecture & Project Structure
-
-The project connects an Express.js web server to an embedded SQLite database using `sqlite` and `sqlite3`, providing full CRUD (Create, Read, Update, Delete) capability over RESTful HTTP endpoints with parameterized SQL queries.
 
 ```text
 lab-02/
@@ -38,9 +37,11 @@ lab-02/
 ├── .gitignore                  # Ignores node_modules/ and .env
 ├── README.md                   # Lab documentation, instructions & viva answers
 └── screenshots/                # Request, response, and database proof captures
+    ├── 00-root-home.png        # GET / (200 OK - API overview)
     ├── 01-get-all.png          # GET /books/ (200 OK - all books)
-    ├── 02-get-one.png          # GET /books/:bookId/ (200 OK - single book)
-    ├── 03-get-one-404.png      # GET /books/:bookId/ (404 Not Found)
+    ├── 02-get-one.png          # GET /books/3/ (200 OK - Clean Code)
+    ├── 02b-get-one-updated.png # GET /books/1/ (200 OK - The Alchemist Updated)
+    ├── 03-get-one-404.png      # GET /books/999/ (404 Not Found)
     ├── 04-post-add.png         # POST /books/ (201 Created)
     ├── 05-post-invalid-400.png # POST /books/ (400 Bad Request - validation error)
     ├── 06-put-update.png       # PUT /books/:bookId/ (200 OK - updated record)
@@ -81,7 +82,7 @@ npm start
 ```
 
 ### 5. Environment Variables
-- `PORT` (Optional): Port number for the HTTP server (default is `3000`, dynamically provided by cloud hosts like Render). No secrets or credentials required.
+- `PORT` (Optional): Port number for the HTTP server (default is `3000`). No secrets or credentials required.
 
 ---
 
@@ -99,7 +100,7 @@ CREATE TABLE IF NOT EXISTS book (
 );
 ```
 
-The database is initially seeded with 9 book rows:
+Initial seed records (9 books):
 1. *The Alchemist* by Paulo Coelho (₹299, 208 pages)
 2. *Wings of Fire* by A. P. J. Abdul Kalam (₹250, 180 pages)
 3. *Clean Code* by Robert C. Martin (₹899, 464 pages)
@@ -114,14 +115,14 @@ The database is initially seeded with 9 book rows:
 
 ## Endpoints
 
-| Method | Path | Status Codes | Description | Live Render Link |
+| Method | Path | Status Codes | Description | Localhost URL |
 |---|---|---|---|---|
-| GET | `/` | 200 | Welcome overview and list of all available API endpoints | [Visit API Overview](https://p-avinash-backend-lab-02.onrender.com/) |
-| GET | `/books/` | 200, 500 | Retrieve all books ordered by ID | [Visit /books/](https://p-avinash-backend-lab-02.onrender.com/books/) |
-| GET | `/books/:bookId/` | 200, 404, 500 | Retrieve a specific book by its ID | [Visit /books/3/](https://p-avinash-backend-lab-02.onrender.com/books/3/) |
-| POST | `/books/` | 201, 400, 500 | Add a new book (requires title, author, price, pages) | `POST /books/` |
-| PUT | `/books/:bookId/` | 200, 400, 404, 500 | Update all details of an existing book | `PUT /books/:bookId/` |
-| DELETE | `/books/:bookId/` | 200, 404, 500 | Remove a book from the database by its ID | `DELETE /books/:bookId/` |
+| GET | `/` | 200 | Welcome overview and list of all available API endpoints | [http://localhost:3000/](http://localhost:3000/) |
+| GET | `/books/` | 200, 500 | Retrieve all books ordered by ID | [http://localhost:3000/books/](http://localhost:3000/books/) |
+| GET | `/books/:bookId/` | 200, 404, 500 | Retrieve a specific book by its ID | [http://localhost:3000/books/3/](http://localhost:3000/books/3/) |
+| POST | `/books/` | 201, 400, 500 | Add a new book (requires title, author, price, pages) | `POST http://localhost:3000/books/` |
+| PUT | `/books/:bookId/` | 200, 400, 404, 500 | Update all details of an existing book | `PUT http://localhost:3000/books/:bookId/` |
+| DELETE | `/books/:bookId/` | 200, 404, 500 | Remove a book from the database by its ID | `DELETE http://localhost:3000/books/:bookId/` |
 
 > **Note:** All queries taking user input strictly use `?` placeholders for parameterized execution to prevent SQL injection.
 
@@ -129,11 +130,20 @@ The database is initially seeded with 9 book rows:
 
 ## Route Walkthrough & Verification Screenshots
 
+### 0. GET `/` — API Overview & Route Directory
+- **URL:** `http://localhost:3000/`
+- **Method:** `GET`
+- **Status:** `200 OK`
+- **Output:** Welcome message and dictionary of available endpoints.
+
+![GET API Overview](screenshots/00-root-home.png)
+
+---
+
 ### 1. GET `/books/` — Retrieve All Books
 - **URL:** `http://localhost:3000/books/`
 - **Method:** `GET`
 - **Status:** `200 OK`
-- **Live URL:** [https://p-avinash-backend-lab-02.onrender.com/books/](https://p-avinash-backend-lab-02.onrender.com/books/)
 - **Output:** Returns JSON array containing all books stored in SQLite.
 
 ![GET all books](screenshots/01-get-all.png)
@@ -144,10 +154,16 @@ The database is initially seeded with 9 book rows:
 - **URL:** `http://localhost:3000/books/3/`
 - **Method:** `GET`
 - **Status:** `200 OK`
-- **Live URL:** [https://p-avinash-backend-lab-02.onrender.com/books/3/](https://p-avinash-backend-lab-02.onrender.com/books/3/)
 - **Output:** Returns book record with ID 3 (*Clean Code*).
 
-![GET one book](screenshots/02-get-one.png)
+![GET one book Clean Code](screenshots/02-get-one.png)
+
+- **URL:** `http://localhost:3000/books/1/`
+- **Method:** `GET`
+- **Status:** `200 OK`
+- **Output:** Returns book record with ID 1 (*The Alchemist (Updated)*).
+
+![GET one book The Alchemist](screenshots/02b-get-one-updated.png)
 
 ---
 
@@ -155,7 +171,6 @@ The database is initially seeded with 9 book rows:
 - **URL:** `http://localhost:3000/books/999/`
 - **Method:** `GET`
 - **Status:** `404 Not Found`
-- **Live URL:** [https://p-avinash-backend-lab-02.onrender.com/books/999/](https://p-avinash-backend-lab-02.onrender.com/books/999/)
 - **Output:** `{"error": "Book not found"}`
 
 ![GET unknown id returns 404](screenshots/03-get-one-404.png)
@@ -287,6 +302,7 @@ The database is initially seeded with 9 book rows:
 - [x] Database table `book` created and seeded with 9 rows via `schema.sql`
 - [x] Server runs with nodemon (`npm run dev`) and standard node (`npm start`)
 - [x] `initializeDBAndServer()` opens database before `app.listen()`
+- [x] `GET /` returns API overview (Status 200)
 - [x] `GET /books/` returns all books (Status 200)
 - [x] `GET /books/:bookId/` returns single book (Status 200)
 - [x] `GET /books/:bookId/` with non-existent ID returns 404
@@ -296,6 +312,6 @@ The database is initially seeded with 9 book rows:
 - [x] `DELETE /books/:bookId/` removes book (Status 200)
 - [x] Parameterized `?` placeholders prevent SQL injection
 - [x] `books.db` verified via SQLite query showing persistent updates
-- [x] Screenshots captured and embedded in `screenshots/`
+- [x] Actual browser screenshots added to `screenshots/` and embedded in `README.md`
 - [x] `.gitignore` configured to ignore `node_modules/` and `.env`
-- [x] Configured for automated Render Cloud deployment via `render.yaml
+- [x] Configured for Render deployment via `render.yaml`
